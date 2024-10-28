@@ -1,3 +1,9 @@
-# EB-webdev-study
+# 0주차(~24.11.01)
 
-각 주차별 활동은 대응하는 브랜치를 참조해주세요. (ex. week-0)
+### 학습 주제
+- [ ] HTTP CSS JS
+- [ ] HTTP
+- [ ] Java Socket, ServerSocket
+
+### 프로젝트: HTTP 요청 메시지 파싱
+- 자세한 사항은 나중에 추가
