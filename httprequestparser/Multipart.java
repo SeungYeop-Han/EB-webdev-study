@@ -46,12 +46,14 @@ public class Multipart {
 
         void parse() {
 
-            int iHeaderEnd = rawPart.indexOf("\r\n\r\n");
-            int iBodyStart = iHeaderEnd + 2;
+            final String CRLF = "\r\n";
+
+            int idxHeaderEnd = rawPart.indexOf(CRLF+CRLF);
+            int idxBodyBegin = idxHeaderEnd + 2;
 
             String[] headerLines = rawPart
-                    .substring(0, iHeaderEnd)
-                    .split("\r\n");
+                    .substring(0, idxHeaderEnd)
+                    .split(CRLF);
 
             for (String header : headerLines) {
                 int iColon = header.indexOf(':');
@@ -85,7 +87,7 @@ public class Multipart {
                 }
             }
 
-            content = rawPart.substring(iBodyStart).trim();
+            content = rawPart.substring(idxBodyBegin).trim();
         }
 
         public void tofile(String path) {
