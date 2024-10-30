@@ -105,7 +105,7 @@ public class HttpRequest {
         for (String headerValue : contentTypeHeaderValues) {
             headerValue = headerValue.trim();
 
-            var split = headerValue.split("=");
+            var split = headerValue.split(EQUALS);
             String name = split[0];
 
             if (name.equals("charset")) {
