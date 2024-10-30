@@ -1,5 +1,12 @@
 package httprequestparser;
 
+import static httprequestparser.HttpSeparator.CRLF; // "\r\n"
+import static httprequestparser.HttpSeparator.EQUALS;
+import static httprequestparser.HttpSeparator.SEMICOLON;
+import static httprequestparser.HttpSeparator.BOUNDARY_BEGIN;   // "--"
+import static httprequestparser.HttpSeparator.BOUNDARY_END; // "--"
+import static httprequestparser.HttpSeparator.COLON;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -13,12 +20,12 @@ public class Multipart {
 
     public Multipart(String body, String charset, String boundary) {
 
-        String[] rawParts = body.split("--" + boundary);
+        String[] rawParts = body.split(BOUNDARY_BEGIN + boundary);
         for (String rawPart : rawParts) {
 
             if (rawPart.equals("")) {
                 continue;   // 첫 토큰은 빈 문자열임
-            } else if (rawPart.startsWith("--")) {
+            } else if (rawPart.startsWith(BOUNDARY_END)) {
                 continue;   // 구분자 뒤에 -- 가 붙으면 끝을 나타냄
             } else {
                 parts.add(new Part(rawPart));
@@ -49,8 +56,6 @@ public class Multipart {
 
         void parse() {
 
-            final String CRLF = "\r\n";
-
             int idxHeaderEnd = rawPart.indexOf(CRLF+CRLF);
             int idxBodyBegin = idxHeaderEnd + 2;
 
@@ -59,7 +64,7 @@ public class Multipart {
                     .split(CRLF);
 
             for (String header : headerLines) {
-                int iColon = header.indexOf(':');
+                int iColon = header.indexOf(COLON);
                 String k = header.substring(0, iColon);
                 String v = header
                         .substring(iColon + 1)
@@ -75,12 +80,12 @@ public class Multipart {
             //      - 이 하위 파트가 참조하는 폼의 HTML 필드에서 사용한 그 이름
             //  3. filename
             //      - 전송된 해당 파일의 원래 이름
-            String[] contentDispositionValues = this.headers.get("Content-Disposition").split(";");
+            String[] contentDispositionValues = this.headers.get("Content-Disposition").split(SEMICOLON);
             for (String headerValues : contentDispositionValues) {
 
                 headerValues = headerValues.trim();
 
-                var split = headerValues.split("=");
+                var split = headerValues.split(EQUALS);
                 String k = split[0];
 
                 if (k.equals("name")) {

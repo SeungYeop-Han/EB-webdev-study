@@ -1,10 +1,14 @@
 package httprequestparser;
 
+import static httprequestparser.HttpSeparator.CRLF;
+import static httprequestparser.HttpSeparator.SP;
+import static httprequestparser.HttpSeparator.COLON;
+import static httprequestparser.HttpSeparator.SEMICOLON;
+import static httprequestparser.HttpSeparator.EQUALS;
+
 import java.util.HashMap;
 
 public class HttpRequest {
-
-    private static final String CRLF = "\r\n";
     
     private String httpRequestMessage;
     
@@ -56,7 +60,7 @@ public class HttpRequest {
 
         // [HTTP Method](sp)[URL](sp)[HTTP Version]CRLF
         // * sp: 공백
-        String[] requestLineTokens = requestLine.split(" ");
+        String[] requestLineTokens = requestLine.split(SP);
         this.method = requestLineTokens[0];
         this.url = requestLineTokens[1];
         this.version = requestLineTokens[2];
@@ -68,7 +72,7 @@ public class HttpRequest {
         // * OWS: Optional White Space
         String[] headers = headerLines.split(CRLF);
         for (String header : headers) {
-            int idxColon = header.indexOf(':');
+            int idxColon = header.indexOf(COLON);
             String k = header.substring(0, idxColon);
             String v = header
                     .substring(idxColon + 1)
@@ -94,7 +98,7 @@ public class HttpRequest {
         //      - 문자 인코딩 표준
         //  3. boundary
         //      - 멀티파트 개체의 각 부분을 구분하기 위해 필수적으로 명시되어야 함.
-        String[] contentTypeHeaderValues = contentType.split(";");
+        String[] contentTypeHeaderValues = contentType.split(SEMICOLON);
         String mediaType = contentTypeHeaderValues[0].trim();
         String charset = null;      // optional
         String boundary = null;     // optional, 멀티파트인 경우에만 필수
