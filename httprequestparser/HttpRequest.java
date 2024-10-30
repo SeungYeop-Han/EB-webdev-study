@@ -30,7 +30,7 @@ public class HttpRequest {
      * H
      * HTTP 구문 요소는 내부적으로 저장되며, getter 메서드로 가져올 수 있습니다.
      */
-    public void parse() {
+    private void parse() {
 
         // 주요 분리 지점 인덱스
         int idxRequestLineBegin = 0;
