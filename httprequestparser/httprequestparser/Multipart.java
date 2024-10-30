@@ -1,10 +1,10 @@
 package httprequestparser;
 
-import static httprequestparser.HttpSeparator.CRLF; // "\r\n"
+import static httprequestparser.HttpSeparator.CRLF;
 import static httprequestparser.HttpSeparator.EQUALS;
 import static httprequestparser.HttpSeparator.SEMICOLON;
-import static httprequestparser.HttpSeparator.BOUNDARY_BEGIN;   // "--"
-import static httprequestparser.HttpSeparator.BOUNDARY_END; // "--"
+import static httprequestparser.HttpSeparator.BOUNDARY_BEGIN;
+import static httprequestparser.HttpSeparator.BOUNDARY_END;
 import static httprequestparser.HttpSeparator.COLON;
 
 import java.io.File;
@@ -22,7 +22,7 @@ public class Multipart {
 
         String[] rawParts = body.split(BOUNDARY_BEGIN + boundary);
         for (String rawPart : rawParts) {
-
+            
             if (rawPart.equals("")) {
                 continue;   // 첫 토큰은 빈 문자열임
             } else if (rawPart.startsWith(BOUNDARY_END)) {
