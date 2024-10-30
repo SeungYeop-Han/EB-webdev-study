@@ -14,6 +14,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import org.springframework.http.HttpHeaders;
+
 public class Multipart {
 
     List<Part> parts = new ArrayList<>();
@@ -80,17 +82,21 @@ public class Multipart {
             //      - 이 하위 파트가 참조하는 폼의 HTML 필드에서 사용한 그 이름
             //  3. filename
             //      - 전송된 해당 파일의 원래 이름
-            String[] contentDispositionValues = this.headers.get("Content-Disposition").split(SEMICOLON);
+            String[] contentDispositionValues = this.headers.get(HttpHeaders.CONTENT_DISPOSITION).split(SEMICOLON);
+
+            final String NAME = "name";
+            final String FILENAME = "filename";
+
             for (String headerValues : contentDispositionValues) {
 
                 headerValues = headerValues.trim();
 
                 var split = headerValues.split(EQUALS);
-                String k = split[0];
+                String name = split[0];
 
-                if (k.equals("name")) {
+                if (name.equals(NAME)) {
                     contentDispositionName = split[1];
-                } else if (k.equals("filename")) {
+                } else if (name.equals(FILENAME)) {
                     contentDispositionFilename = split[1];
                 }
             }

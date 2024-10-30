@@ -8,6 +8,8 @@ import static httprequestparser.HttpSeparator.EQUALS;
 
 import java.util.HashMap;
 
+import org.springframework.http.HttpHeaders;
+
 public class HttpRequest {
     
     private String httpRequestMessage;
@@ -83,7 +85,7 @@ public class HttpRequest {
 
     private void parseBody(String body) {
 
-        String contentType = this.headers.get("Content-Type");
+        String contentType = this.headers.get(HttpHeaders.CONTENT_TYPE);
 
         // Content-type 헤더와 본문은 항상 함께 존재함
         if (contentType == null) {
@@ -102,20 +104,25 @@ public class HttpRequest {
         String mediaType = contentTypeHeaderValues[0].trim();
         String charset = null;      // optional
         String boundary = null;     // optional, 멀티파트인 경우에만 필수
+
+        final String CHARSET = "charset";
+        final String BOUNDARY = "boundary";
+        final String MULTIPART = "multipart";
+
         for (String headerValue : contentTypeHeaderValues) {
             headerValue = headerValue.trim();
 
             var split = headerValue.split(EQUALS);
             String name = split[0];
 
-            if (name.equals("charset")) {
+            if (name.equals(CHARSET)) {
                 charset = split[1];
-            } else if (name.equals("boundary")) {
+            } else if (name.equals(BOUNDARY)) {
                 boundary = split[1];
             }
         }
 
-        if (mediaType.startsWith("multipart")) {
+        if (mediaType.startsWith(MULTIPART)) {
             multipart = new Multipart(body, charset, boundary);
         }
     }
