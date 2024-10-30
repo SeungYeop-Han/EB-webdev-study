@@ -1,3 +1,5 @@
+package httprequestparser;
+
 import java.util.HashMap;
 
 public class HttpRequest {
