@@ -1,3 +1,4 @@
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -92,8 +93,8 @@ public class Multipart {
 
         public void tofile(String path) {
 
-            if (!path.endsWith("/")) {
-                path += "/";
+            if (!path.endsWith(File.separator)) {
+                path += File.separator;
             }
 
             try (FileWriter writer = 

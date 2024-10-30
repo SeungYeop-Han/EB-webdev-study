@@ -1,8 +1,18 @@
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.File;
 import java.io.FileNotFoundException;
 
 public class Application {
+
+    private static final String APP_ROOT = 
+            System.getProperty("user.dir");
+
+    private static final String DUMMY_FILE_PATH
+            = APP_ROOT + File.separator + "in" + File.separator + "dummyrequest.txt";
+
+    private static final String UPLOAD_PATH
+            = APP_ROOT + File.separator + "out";
     
     public static void main(String[] args) {
         
@@ -13,7 +23,7 @@ public class Application {
         }
 
         HttpRequest httpRequest = new HttpRequest(httpRequestMsg);
-        httpRequest.saveAllMultiparts("./out");
+        httpRequest.saveAllMultiparts(UPLOAD_PATH);
     }
 
     /**
@@ -23,9 +33,8 @@ public class Application {
     public static String receive() {
 
         String httpRequestMessage = null;
-        String targetFilename = "./in/dummyrequest.txt";
 
-        try (FileReader reader = new FileReader(targetFilename)) {
+        try (FileReader reader = new FileReader(DUMMY_FILE_PATH)) {
 
             char[] buffer = new char[8 * 1024];
             StringBuffer sb = new StringBuffer();
@@ -38,9 +47,9 @@ public class Application {
             httpRequestMessage = sb.toString();
             
         } catch (FileNotFoundException e) {
-            System.err.println("파일 " + targetFilename + "을 찾을 수 없습니다.");
+            System.err.println("파일 " + DUMMY_FILE_PATH + "을 찾을 수 없습니다.");
         } catch (IOException e) {
-            System.err.println("파일 " + targetFilename + "을 읽는 도중에 문제가 발생했습니다.");
+            System.err.println("파일 " + DUMMY_FILE_PATH + "을 읽는 도중에 문제가 발생했습니다.");
         }
 
         return httpRequestMessage;
