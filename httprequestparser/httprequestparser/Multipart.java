@@ -25,7 +25,8 @@ public class Multipart {
         String[] rawParts = body.split(BOUNDARY_BEGIN + boundary);
         for (String rawPart : rawParts) {
             
-            if (rawPart.equals("")) {
+            // rawPart 는 null일 수 없음
+            if (rawPart.isEmpty()) {
                 continue;   // 첫 토큰은 빈 문자열임
             } else if (rawPart.startsWith(BOUNDARY_END)) {
                 continue;   // 구분자 뒤에 -- 가 붙으면 끝을 나타냄
@@ -94,9 +95,9 @@ public class Multipart {
                 var split = headerValues.split(EQUALS);
                 String name = split[0];
 
-                if (name.equals(NAME)) {
+                if (NAME.equals(name)) {
                     contentDispositionName = split[1];
-                } else if (name.equals(FILENAME)) {
+                } else if (FILENAME.equals(name)) {
                     contentDispositionFilename = split[1];
                 }
             }

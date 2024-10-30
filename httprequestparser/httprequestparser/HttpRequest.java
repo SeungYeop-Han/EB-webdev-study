@@ -115,9 +115,9 @@ public class HttpRequest {
             var split = headerValue.split(EQUALS);
             String name = split[0];
 
-            if (name.equals(CHARSET)) {
+            if (CHARSET.equals(name)) {
                 charset = split[1];
-            } else if (name.equals(BOUNDARY)) {
+            } else if (BOUNDARY.equals(name)) {
                 boundary = split[1];
             }
         }
