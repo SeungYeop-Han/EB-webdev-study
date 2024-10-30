@@ -12,8 +12,6 @@ import org.springframework.http.HttpHeaders;
 
 public class HttpRequest {
     
-    private String httpRequestMessage;
-    
     // 요청줄
     private String method;
     private String url;
@@ -28,9 +26,7 @@ public class HttpRequest {
 
     // 생성자
     public HttpRequest(String httpRequestMessage) {
-
-        this.httpRequestMessage = httpRequestMessage;
-        parse();
+        parse(httpRequestMessage);
     }
 
     /**
@@ -38,7 +34,7 @@ public class HttpRequest {
      * H
      * HTTP 구문 요소는 내부적으로 저장되며, getter 메서드로 가져올 수 있습니다.
      */
-    private void parse() {
+    private void parse(String httpRequestMessage) {
 
         // 주요 분리 지점 인덱스
         int idxRequestLineBegin = 0;

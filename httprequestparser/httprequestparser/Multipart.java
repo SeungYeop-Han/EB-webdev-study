@@ -44,20 +44,16 @@ public class Multipart {
 
     private class Part {
 
-        private String rawPart;
-
         private HashMap<String, String> headers = new HashMap<>();
         private String contentDispositionName;
         private String contentDispositionFilename;
         private String content;
 
         Part(String rawPart) {
-
-            this.rawPart = rawPart.trim();
-            parse();
+            parse(rawPart.trim());
         }
 
-        void parse() {
+        void parse(String rawPart) {
 
             int idxHeaderEnd = rawPart.indexOf(CRLF+CRLF);
             int idxBodyBegin = idxHeaderEnd + 2;
