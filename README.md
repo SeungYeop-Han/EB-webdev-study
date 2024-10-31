@@ -20,13 +20,12 @@
   - [ ] 다 읽고 나서 결과를 전달하던 방식에서 → 읽으면서 파싱할 수 있도록 스트림을 전달하는 방식으로 변경
 
 ### 프로젝트2: Javascript 빙고 게임 만들기
-- [ ] 시간이 많이 않으므로 최소한의 요구사항만 지키자
-  - [ ] 양방향 옵저버 패턴?
+![bingo](https://github.com/user-attachments/assets/778fd562-9946-4633-84af-2df4a8246630)
 
 ### 매일 자바 학습
 - [x] 10.29 화: Java InetAddress, Socket & ServerSocket
 - [x] 10.30 수: Java I/O API: File & Path
-- [ ] 10.31 목: Java FileInputStream, FileOutStream
+- [x] 10.31 목: 자바스크립트 복습으로 대체
 - [ ] 11.01 금: 
 - [ ] 11.02 토: 
 
@@ -38,7 +37,14 @@
     | 연습 문제 | 10808 | [알파벳 개수](https://www.acmicpc.net/problem/10808) |
     | 기본 문제✔ | 2577 | [숫자의 개수](https://www.acmicpc.net/problem/2577) |
     | 기본 문제✔ | 1475 | [방 번호](https://www.acmicpc.net/problem/1475) |
-- [ ] 10.31 목: 
+- [x] 10.31 목: 배열 5문제
+    | 문제 분류 | 문제 | 문제 제목 |
+    | --- | --- | --- |
+    | 기본 문제✔ | 3273 | [두 수의 합](https://www.acmicpc.net/problem/3273) |
+    | 기본 문제 | 10807 | [개수 세기](https://www.acmicpc.net/problem/10807) |
+    | 기본 문제 | 13300 | [방 배정](https://www.acmicpc.net/problem/13300) |
+    | 기본 문제 | 11328 | [Strfry](https://www.acmicpc.net/problem/11328) |
+    | 기본 문제 | 1919 | [애너그램 만들기](https://www.acmicpc.net/problem/1919) |
 - [ ] 11.01 금: 
 - [ ] 11.02 토: 
 
@@ -46,7 +52,7 @@
 - [ ] HTTP CSS JS 복습
 - [x] HTTP 복습
 - [ ] 디자인 패턴
-  - [ ] 옵저버 패턴
+  - [x] 옵저버 패턴
   - [ ] 커맨드 패턴
   - [ ] 템플릿 메서드 패턴
   - [ ] 전략 패턴
